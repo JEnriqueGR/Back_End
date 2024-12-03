@@ -1,7 +1,8 @@
 package com.questmaster.proyecto.controller;
 
-import com.questmaster.proyecto.modelo.Logro;
-import com.questmaster.proyecto.repository.LogroRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
