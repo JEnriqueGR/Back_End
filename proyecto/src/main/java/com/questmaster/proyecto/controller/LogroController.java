@@ -9,29 +9,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/logros")
 public class LogroController {
-    private final LogroRepository logroRepository;
-
-    public LogroController(LogroRepository logroRepository) {
-        this.logroRepository = logroRepository;
-    }
+    @Autowired
+    private LogroRepository logroRepository;
 
     @GetMapping
-    public List<Logro> listarLogros() {
-        return logroRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Logro obtenerLogro(@PathVariable Long id) {
-        return logroRepository.findById(id).orElse(null);
+    public List<Logro> listarLogros(@RequestParam Long juegoId) {
+        return logroRepository.findByJuegoId(juegoId);
     }
 
     @PutMapping("/{id}")
-    public Logro actualizarEstado(@PathVariable Long id, @RequestBody boolean estado) {
-        Logro logro = logroRepository.findById(id).orElse(null);
-        if (logro != null) {
-            logro.setEstado(estado);
-            return logroRepository.save(logro);
-        }
-        return null;
+    public ResponseEntity<Logro> actualizarEstado(@PathVariable Long id, @RequestBody boolean estado) {
+        return logroRepository.findById(id)
+                .map(logro -> {
+                    logro.setEstado(estado);
+                    logroRepository.save(logro);
+                    return ResponseEntity.ok(logro);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }

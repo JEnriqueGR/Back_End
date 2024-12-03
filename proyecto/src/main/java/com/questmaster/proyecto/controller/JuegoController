@@ -9,11 +9,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/juegos")
 public class JuegoController {
-    private final JuegoRepository juegoRepository;
-
-    public JuegoController(JuegoRepository juegoRepository) {
-        this.juegoRepository = juegoRepository;
-    }
+    @Autowired
+    private JuegoRepository juegoRepository;
 
     @GetMapping
     public List<Juego> listarJuegos() {
@@ -21,7 +18,10 @@ public class JuegoController {
     }
 
     @GetMapping("/{id}")
-    public Juego obtenerJuego(@PathVariable Long id) {
-        return juegoRepository.findById(id).orElse(null);
+    public ResponseEntity<Juego> obtenerJuego(@PathVariable Long id) {
+        return juegoRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
+
