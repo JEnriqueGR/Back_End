@@ -3,6 +3,7 @@ package com.questmaster.proyecto.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "juegos")
 public class Juego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

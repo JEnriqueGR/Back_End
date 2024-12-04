@@ -3,6 +3,7 @@ package com.questmaster.proyecto.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "logros")
 public class Logro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
