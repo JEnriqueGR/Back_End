@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/logros")
 public class LogroController {
 
     @Autowired
     private LogroRepository logroRepository;
 
-    @GetMapping("/{juegoId}")
-    public List<Logro> obtenerLogrosPorJuego(@PathVariable Long juegoId) {
+    @GetMapping("/logros/{juegoId}")
+    public List<Logro> getLogrosByJuego(@PathVariable Long juegoId) {
         return logroRepository.findByJuegoId(juegoId);
     }
 
-    @PutMapping("/{id}")
-    public Logro cambiarEstado(@PathVariable Long id) {
-        Logro logro = logroRepository.findById(id).orElseThrow();
-        logro.setEstado(!logro.isEstado());
+    @PutMapping("/logro/{logroId}")
+    public Logro updateLogro(@PathVariable Long logroId, @RequestParam boolean estado) {
+        Logro logro = logroRepository.findById(logroId).orElseThrow();
+        logro.setEstado(estado);
         return logroRepository.save(logro);
     }
 }
+

@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/juegos")
 public class JuegoController {
 
     @Autowired
     private JuegoRepository juegoRepository;
 
-    @GetMapping
-    public List<Juego> obtenerJuegos() {
+    @GetMapping("/juegos")
+    public List<Juego> getAllJuegos() {
         return juegoRepository.findAll();
     }
 }
