@@ -3,26 +3,48 @@ package com.questmaster.proyecto.controller;
 import com.questmaster.proyecto.model.Logro;
 import com.questmaster.proyecto.repository.LogroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/logros")
 public class LogroController {
 
     @Autowired
     private LogroRepository logroRepository;
 
-    @GetMapping("/logros/{juegoId}")
+    @GetMapping("/{juegoId}")
     public List<Logro> getLogrosByJuego(@PathVariable Long juegoId) {
         return logroRepository.findByJuegoId(juegoId);
     }
 
-    @PutMapping("/logro/{logroId}")
-    public Logro updateLogro(@PathVariable Long logroId, @RequestParam boolean estado) {
-        Logro logro = logroRepository.findById(logroId).orElseThrow();
-        logro.setEstado(estado);
-        return logroRepository.save(logro);
+    @PutMapping("/{logroId}/estado")
+    public ResponseEntity<Logro> updateLogroEstado(@PathVariable Long logroId, @RequestBody EstadoRequest estadoRequest) {
+        Optional<Logro> logroOptional = logroRepository.findById(logroId);
+        if (logroOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Logro logro = logroOptional.get();
+        logro.setEstado(estadoRequest.isEstado());
+        logroRepository.save(logro);
+        return ResponseEntity.ok(logro);
+    }
+
+    // Clase auxiliar para manejar el estado
+    public static class EstadoRequest {
+        private boolean estado;
+
+        public boolean isEstado() {
+            return estado;
+        }
+
+        public void setEstado(boolean estado) {
+            this.estado = estado;
+        }
     }
 }
+
 
