@@ -13,7 +13,7 @@ public class Logro {
     private boolean estado; // Estado completado o pendiente
     private String dificultad;
     private String imagen; // URL de la imagen
-    private String detalles;
+    private String detalle;
 
     @ManyToOne
     @JoinColumn(name = "juego_id", referencedColumnName = "id")
@@ -34,6 +34,6 @@ public class Logro {
     public void setImagen(String imagen) { this.imagen = imagen; }
     public Juego getJuego() { return juego; }
     public void setJuego(Juego juego) { this.juego = juego; }
-    public String getDetalles() { return detalles; }
-    public void setDetalles(String detalles) { this.detalles = detalles; }
+    public String getDetalles() { return detalle; }
+    public void setDetalles(String detalles) { this.detalle = detalles; }
 }
