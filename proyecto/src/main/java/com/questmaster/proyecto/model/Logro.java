@@ -32,8 +32,8 @@ public class Logro {
     public void setDificultad(String dificultad) { this.dificultad = dificultad; }
     public String getImagen() { return imagen; }
     public void setImagen(String imagen) { this.imagen = imagen; }
+    public String getDetalle() { return detalle; }
+    public void setDetalle(String detalle) { this.detalle = detalle; }
     public Juego getJuego() { return juego; }
     public void setJuego(Juego juego) { this.juego = juego; }
-    public String getDetalles() { return detalle; }
-    public void setDetalles(String detalle) { this.detalle = detalle; }
 }
