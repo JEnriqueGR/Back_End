@@ -45,6 +45,12 @@ public class LogroController {
             this.estado = estado;
         }
     }
+
+    @GetMapping("/logro/{logroId}")
+    public Logro getLogro(@PathVariable Long logroId) {
+        return logroRepository.findById(logroId).orElseThrow();
+    }
+
 }
 
 
