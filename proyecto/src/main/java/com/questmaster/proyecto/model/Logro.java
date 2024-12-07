@@ -35,5 +35,5 @@ public class Logro {
     public Juego getJuego() { return juego; }
     public void setJuego(Juego juego) { this.juego = juego; }
     public String getDetalles() { return detalle; }
-    public void setDetalles(String detalles) { this.detalle = detalles; }
+    public void setDetalles(String detalle) { this.detalle = detalle; }
 }
