@@ -10,9 +10,8 @@ public class Juego {
     private Long id;
     private String titulo;
     private String plataforma;
-    private String imagen; // URL de la imagen
+    private String imagen;
 
-    // Getters y setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getTitulo() { return titulo; }

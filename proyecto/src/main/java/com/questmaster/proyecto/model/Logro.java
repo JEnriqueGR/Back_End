@@ -10,16 +10,15 @@ public class Logro {
     private Long id;
     private String nombre;
     private String descripcion;
-    private boolean estado; // Estado completado o pendiente
+    private boolean estado;
     private String dificultad;
-    private String imagen; // URL de la imagen
+    private String imagen;
     private String detalle;
 
     @ManyToOne
     @JoinColumn(name = "juego_id", referencedColumnName = "id")
     private Juego juego;
 
-    // Getters y setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNombre() { return nombre; }
