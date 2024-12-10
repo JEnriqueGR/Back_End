@@ -1,0 +1,77 @@
+mysql> CREATE DATABASE questmaster;
+mysql> USE questmaster;
+Database changed
+mysql>
+mysql> CREATE TABLE juegos (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     titulo VARCHAR(255) NOT NULL,
+    ->     plataforma ENUM('Nintendo', 'Xbox', 'PS', 'PC') NOT NULL
+    -> );
+mysql>
+mysql> CREATE TABLE logros (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     nombre VARCHAR(255) NOT NULL,
+    ->     descripcion TEXT,
+    ->     estado BOOLEAN DEFAULT false,
+    ->     dificultad ENUM('Facil', 'Normal', 'Dificil') NOT NULL,
+    ->     juego_id INT,
+    ->     FOREIGN KEY (juego_id) REFERENCES juegos(id)
+    -> );
+mysql>
+mysql> INSERT INTO juegos (titulo, plataforma) VALUES
+    -> ('Persona 3 Reload', 'PS'),
+    -> ('Destiny 2', 'PC'),
+    -> ('Minecraft', 'PC'),
+    -> ('Cassette Beasts', 'Nintendo'),
+    -> ('Baldur\'s Gate', 'Xbox');
+mysql>
+mysql> INSERT INTO logros (nombre, descripcion, estado, dificultad, juego_id) VALUES
+    -> ('Camino a la salvación', 'Has fusionado a Mesías.(Solo en el modo Historia principal de Persona 3 Reload)', b'0', 'Facil', 1),
+    -> ('Ojo de águila', 'Has conseguido todos los fragmentos crepusculares de la ciudad.(Solo en el modo Historia principal de Persona 3 Reload)', b'0', 'Normal', 1),
+    -> ('El segador segado', 'Has derrotado a El segador.(Solo en el modo Historia principal de Persona 3 Reload)', b'0', 'Dificil', 1),
+    -> ('La fuerza de nuestros corazones', 'Has usado la teúrgia de todos tus compañeros.(Solo en el modo Historia principal de Persona 3 Reload)', b'0', 'Normal', 1),
+    -> ('Tu media naranja', 'Has entablado una relación romántica.', b'0', 'Normal', 1),
+    -> ('Prrrrtector benevolente', 'Has cuidado de un gato hasta que ha recuperado la salud.', b'0', 'Facil', 1),
+    -> ('Vínculo inquebrantable', 'Has alcanzado el máximo en un vínculo social.', b'0', 'Facil', 1);
+mysql>
+mysql> INSERT INTO logros (nombre, descripcion, estado, dificultad, juego_id) VALUES
+    -> ('Héroe popular', 'Completa un evento público heroico.', b'0', 'Facil', 2),
+    -> ('Que empiece el juicio', 'Reúnete con un Agente de los Nueve en alguna parte del sistema.', b'0', 'Facil', 2),
+    -> ('Una vida excepcional', 'Reúne 15 armas o piezas de armaduras excepcionales de la Guerra Roja.', b'0', 'Normal', 2),
+    -> ('Cae la Oscuridad', 'Derrota a un jefe de Ocaso de Los Renegados.', b'0', 'Normal', 2),
+    -> ('Los mejores deseos', 'Completa la incursión "Último deseo".', b'0', 'Dificil', 2);
+mysql>
+mysql> INSERT INTO logros (nombre, descripcion, estado, dificultad, juego_id) VALUES
+    -> ('Adquisición de diamantes', 'Consigue diamantes.', b'0', 'Facil', 3),
+    -> ('Superviviente', 'Sobrevive 100 días en el modo supervivencia.', b'0', 'Normal', 3),
+    -> ('El final', 'Derrota al Dragón del End.', b'0', 'Dificil', 3),
+    -> ('El regreso del rey', 'Vence a los Illagers y conquista la Mansión del Bosque.', b'0',
+mysql>
+mysql> INSERT INTO logros (nombre, descripcion, estado, dificultad, juego_id) VALUES
+    -> ('Remaestría', 'Remasteriza una cinta', b'0', 'Facil', 4),
+    -> ('La suma de las partes', 'Derrota a una fusión salvaje.', b'0', 'Normal', 4),
+    -> ('Tiene un billete de tren', 'Reabre todas las estaciones.', b'0', 'Normal', 4),
+    -> ('Zoología básica', 'Observa 120 especies diferentes.', b'0', 'Dificil', 4),
+    -> ('Dos corazones acompasados', 'Empieza una relación sentimental', b'0', 'Normal', 4);
+mysql>
+mysql> INSERT INTO logros (nombre, descripcion, estado, dificultad, juego_id) VALUES
+    -> ('Puños letales', 'Lee 100 libros distintos en una partida. Salir de aventuras no es solo hacer misiones, ¿sabes?', b'0', 'Normal', 5),
+    -> ('Ratón de biblioteca', 'Descripción del logro 1 de Baldur\'s Gate', b'0', 'Facil', 5),
+    -> ('Procedimiento no invasivo', 'Mata al cirujano sin dejar que emplee sus habilidades quirúrgicas en combate.', b'0', 'Normal', 5),
+    -> ('Aterrizaje forzoso', 'En la Encrucijada de la Sierpe, espera a que el dragón esté en pleno vuelo y derríbalo. Zas.', b'0', 'Dificil', 5);
+
+mysql> UPDATE logros
+    -> SET detalle = 'Mesías es una Persona de nivel 91, y podrás fusionarla una vez alcances el piso 255 de La Torre Tártaro y por tanto llegues al rango 10 del vínculo del Juicio como parte de la historia. Para hacer la fusión necesitas fusionar a Tánatos, que es una de las fusiones especiales que la tienes disponible desde que alcanzas el rango 10 con el vínculo Muerte, con Orfeo que es tu Persona inicial.'
+    -> WHERE id = 1;
+mysql>
+mysql> UPDATE logros
+    -> SET detalle = 'Tan pronto como puedas explorar la ciudad el 21/4, podrás conseguir la mayoría de ellos, pero habrá 2 que tendrás que esperar un poco, uno en el club Escapade para el que necesitarás 2 de coraje para entrar y otra en la azotea de la residencia a la que tendrás acceso avanzando un poco en la historia. Eh aquí un video de Perfect Paradox con todas las ubicaciones: https://youtu.be/NQ9t5Li0lvY?si=jgHXiPEN5IEkPf2p'
+    -> WHERE id = 2;
+mysql>
+mysql> UPDATE logros
+    -> SET detalle = 'El segador aparece si permaneces bastante tiempo en una planta de La Tártaro, apareciendo mucho más rápido en las zonas oscuras. Para una dificultad normal necesitas al menos un nivel 80 para enfrentarle con garantías, pero será menos si juegas en menor dificultad (en la más fácil además con reanimaciones infinitas), y más si decides afrontar el enfrentamiento en dificultades superiores. No tiene debilidades ni resistencias y tiende a atacar a tus debilidades y provocar estados alterados, además se fortalece y hace ataques estilo hama y mudo, que pueden matarte al instante. Hay dos formas de derrotarle: 1- Tradicional, es decir, combatiendo de forma clásica. 2- Usando Armagedón, la teurgia de Satán (nivel 82) y Helel (nivel 88) que le derrotará de un solo golpe. Entra directamente con la teurgia cargada y usa un ataque por sorpresa para asegurarte el primer turno.'
+    -> WHERE id = 3;
+mysql>
+mysql> UPDATE logros
+    -> SET detalle = 'Avanzando un poco en la historia desbloquearás las habilidades de Teurgia, una especie de ataque especial de cada personaje. Para desencadenar estos ataques tendrás primero que subir la barra especial de Teurgia que sube con cada acción, aunque cada personaje tiene una manera concreta de impulsar esto más rápidamente, por ejemplo Yukari curando a sus compañeros o Aigis usando habilidades físicas. Simplemente debes realizar una vez la Teurgia con cada uno de los 10 miembros del SEES, incluida Fuuka que tiene también su propia Teurgia que se potencia analizando enemigos aunque no puedes ver su barra. El trofeo resulta perdible puesto que Shinjiro Aragaki solo se unirá a SEES de manera temporal, por lo que tan pronto como le tengas en el equipo a principios de Septiembre haz su Teurgia para evitar sustos.'
+    -> WHERE id = 4;
